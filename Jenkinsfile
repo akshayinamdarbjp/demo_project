@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Docker Run') {
             steps {
-              sh' docker ps -q --filter "name=flask-docker-demo-app" | grep -q . && docker stop flask-docker-demo-app  && docker rm -fv flask-docker-demo-app'
+              sh' docker ps -q --filter "name=flask-docker-demo-app" | grep -q . && docker stop flask-docker-demo-app  && docker rm -fv flask-docker-demo-app || true'
               sh' docker run --name flask-docker-demo-app -d -p 80:80 flask-docker-demo-app'
             }
         }
