@@ -1,0 +1,15 @@
+---
+- name: "Installing Dependencies"
+  hosts: demo_ec2
+  become: true
+  gather_facts: yes
+  
+
+  roles:
+    - name: install_java
+      tags: java
+    - name: install_jenkins
+      tags: jenkins
+    - name: install_docker
+      tags: docker
+    

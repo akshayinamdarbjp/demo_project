@@ -1,0 +1,7 @@
+---
+# tasks file for install_java
+- name: Installing Java Package
+  apt: 
+    state: present
+    update_cache: yes
+    pkg: openjdk-8-jdk 

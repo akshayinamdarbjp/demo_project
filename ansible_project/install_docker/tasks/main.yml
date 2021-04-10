@@ -1,0 +1,10 @@
+---
+# tasks file for install_java
+- name: Installing docker
+  apt: 
+    state: present
+    update_cache: yes
+    pkg: docker.io
+
+- name: ensure Docker is running
+  service: name=jenkins state=started
