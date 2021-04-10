@@ -20,14 +20,14 @@ pipeline {
         stage('Build the docker image') {
             steps {
                 script {
-                   sh 'docker build --tag flask-docker-demo-app $WORKSPACE/demo_project/'
+                   sh 'docker build --tag demo-app $WORKSPACE/demo_project/'
                 }
             }
         }
         stage('Docker Run') {
             steps {
-              sh' docker ps -q --filter "name=flask-docker-demo-app" | grep -q . && docker stop flask-docker-demo-app  && docker rm -fv flask-docker-demo-app || true'
-              sh' docker run --name flask-docker-demo-app -d -p 80:80 flask-docker-demo-app'
+              sh' docker ps -q --filter "name=demo-app" | grep -q . && docker stop demo-app  && docker rm -fv demo-app || true'
+              sh' docker run --name demo-app -d -p 80:80 demo-app'
             }
         }
         stage('Test the output') {
