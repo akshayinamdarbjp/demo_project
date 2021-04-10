@@ -16,6 +16,9 @@
   - name: Ensure Jenkins is Running
     service: name=jenkins state=started
 
+  - name: Ensure Jenkins is Running after reboot
+    service: name=jenkins state=yes
+
   - name: Printing admin Password
     shell: | 
       AdminPass=`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`

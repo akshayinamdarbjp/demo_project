@@ -1,5 +1,5 @@
 ---
-# tasks file for install_java
+# tasks file for install_docker
 - name: Installing docker
   apt: 
     state: present
@@ -7,4 +7,14 @@
     pkg: docker.io
 
 - name: ensure Docker is running
-  service: name=jenkins state=started
+  service: name=docker state=started
+
+- name: Ensure Docker is Running after reboot
+    service: name=docker state=yes
+
+- name: Add permissions for Jenkins User to interact with Docker
+    shell: | 
+       sudo usermod -a -G docker jenkins
+       reboot
+    become: true
+
