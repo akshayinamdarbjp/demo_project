@@ -44,7 +44,7 @@ pipeline {
     stage('Docker Run') {
       steps {
         script {
-          sh ' docker ps -q --filter "name=demo-app" | grep -q . && docker stop demo-app  && docker rm -fv demo-app || true'
+          sh ' docker ps -q --filter "name=demo-app" | grep -q . && docker stop demo-app  || docker rm -fv demo-app || true'
           sh ' sleep 5'
           sh ' docker run --name demo-app -d -p 80:80 demo-app'
         }
