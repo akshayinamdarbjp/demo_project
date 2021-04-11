@@ -45,6 +45,7 @@ pipeline {
       steps {
         script {
           sh ' docker ps -q --filter "name=demo-app" | grep -q . && docker stop demo-app  && docker rm -fv demo-app || true'
+          sh ' sleep 5'
           sh ' docker run --name demo-app -d -p 80:80 demo-app'
         }
       }
@@ -61,6 +62,7 @@ pipeline {
     stage('Test the output') {
       steps {
         script {
+          sleep 5
           ReturnedOutput = sh(script: 'curl -s -XGET "http://127.0.0.1:80"', returnStdout: true)
           ExpectedOutput = '"Hello Airbus"'
           echo "Build full flag: ${ReturnedOutput}"
