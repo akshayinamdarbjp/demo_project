@@ -17,7 +17,7 @@
     service: name=jenkins state=started
 
   - name: Ensure Jenkins is Running after reboot
-    service: name=jenkins state=yes
+    shell: systemctl enable jenkins 
 
   - name: Printing admin Password
     shell: | 

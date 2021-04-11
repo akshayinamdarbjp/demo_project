@@ -10,11 +10,18 @@
   service: name=docker state=started
 
 - name: Ensure Docker is Running after reboot
-    service: name=docker state=yes
+  shell: systemctl enable docker
 
 - name: Add permissions for Jenkins User to interact with Docker
-    shell: | 
+  shell: | 
        sudo usermod -a -G docker jenkins
-       reboot
-    become: true
+  become: true
 
+- name: Unconditionally reboot the machine with all defaults
+  reboot:
+    msg: "Reboot initiated by Ansible"
+    connect_timeout: 5
+    reboot_timeout: 100
+    pre_reboot_delay: 0
+    post_reboot_delay: 10
+    test_command: whoami
